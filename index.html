@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+    <h1>Suportes balanceados</h1>
+
+    <label>Digite sua sintaxe ( {}, [], () ): </label>
+    <input type="text" id="texto" />
+    <button onClick="verificarString()">Verificar</button>
+
+    <script>
+        function verificarString() {
+
+            // Recebe código digitado
+            let texto = document.getElementById('texto').value;
+
+            // Inicializar array para guardar variação da validação
+            let array = [];
+
+            // Percorrer array e verificar o ínicio da string
+            for (let i = 0; i < texto.length; i++) {
+                let x = texto[i];
+
+                if (x == '(' || x == '[' || x == '{') {
+                    array.push(x);
+                    continue;
+                }
+
+                if (array.length == 0)
+                    alert('Inválida');
+
+                let verificacao;
+
+                switch (x) {
+                    case ')':
+                        verificacao = array.pop();
+                        if (verificacao == '{' || verificacao == '[')
+                            alert('Inválida');
+                        break;
+
+                    case '}':
+                        verificacao = array.pop();
+                        if (verificacao == '(' || verificacao == '[')
+                            alert('Inválida');
+                        break;
+
+                    case ']':
+                        verificacao = array.pop();
+                        if (verificacao == '(' || verificacao == '{')
+                            alert('Inválida');
+                        break;
+                }
+            }
+
+            // Verificar se o array está vazio ou seja se a string está balanceada
+            if (array.length == 0) {
+                alert('Válida')
+            }else{
+                alert('Inválida')
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
